@@ -20,7 +20,21 @@ sudo systemctl status libvirtd.service
 ```
 
 ## Creacion de red para las maquinas virtuales
-
+Primero es necesario habilitar el servicio de redes virtuales.
 ```
 sudo virsh net-start default
 ```
+Ahora con este comando haremos que inicie automaticamente al reiniciar la computadora.
+```
+sudo virsh net-autostart default
+```
+Tambien es necesario agregar los permisos necesarios para que el servicio se pueda conectar con las maquinas virtuales.
+```
+sudo usermod -aG libvirt $USER
+sudo usermod -aG libvirt-qemu $USER
+sudo usermod -aG kvm $USER
+sudo usermod -aG input $USER
+sudo usermod -aG disk $USER
+```
+Listo! Terminamos el setup inicial, solo falta reiniciar el equipo.
+
