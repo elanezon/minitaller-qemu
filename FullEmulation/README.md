@@ -89,6 +89,11 @@ Compilamos el codigo
 ```
 gcc -o pascalstriangle piramid.c
 ```
+Verificamos que el archivo se compilo para la arquitectura RISC-V
+```
+file pascalstriangle
+```
+
 Y finalmente lo corremos.
 ```
 ./pascalstriangle
