@@ -51,7 +51,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 Instalamos los paquetes necesarios para la compilación
 ```
-sudo apt install build-essential
+sudo apt install build-essential -y
 ```
 
 Corremos el siguiente comando para asegurarnos que gcc se instalo de manera correcta
