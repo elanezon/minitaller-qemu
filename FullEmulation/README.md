@@ -37,3 +37,58 @@ qemu-system-riscv64 \
 -device virtio-rng-pci \
 -drive file=ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
 ```
+Cuando vea el siguiente mensaje en la consola presione Enter
+[  OK  ] Reached target Cloud-init target.
+
+El usuario y la contraseña es ubuntu, debere crear una nueva contraseña para poder ingresar.
+
+Para poder compilar es necesario instalar el paquete build-essentials
+
+Correr el siguiente comando puede tardar un tiempo ya que hay muchos paquetes que actualizar
+```
+sudo apt update && sudo apt upgrade -y
+```
+Instalamos los paquetes necesarios para la compilación
+```
+sudo apt install build-essential
+```
+
+Corremos el siguiente comando para asegurarnos que gcc se instalo de manera correcta
+```
+gcc --version
+```
+Creamos un archivo piramid.c
+```
+nano piramid.c
+```
+Copiamos el siguiente codigo en piramid.c
+```
+#include <stdio.h>
+int main() {
+   int rows, coef = 1, space, i, j;
+   printf("Enter the number of rows: ");
+   scanf("%d", &rows);
+   for (i = 0; i < rows; i++) {
+      for (space = 1; space <= rows - i; space++)
+         printf("  ");
+      for (j = 0; j <= i; j++) {
+         if (j == 0 || i == 0)
+            coef = 1;
+         else
+            coef = coef * (i - j + 1) / j;
+         printf("%4d", coef);
+      }
+      printf("\n");
+   }
+   return 0;
+}
+
+```
+Compilamos el codigo
+```
+gcc -o pascalstriangle piramid.c
+```
+Y finalmente lo corremos.
+```
+./pascalstriangle
+```
