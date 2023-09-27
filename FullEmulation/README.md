@@ -25,7 +25,7 @@ xz -dk ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img.xz
 ```
 Para poder instalar los programas que requerimos sin problemas es necesario aumentar el tamaño de la imagen, con el siguiente comando la aumentamos en 5GB. El sistema de archivos automaticamente se expande para tomar el nuevo tamaño.
 ```
-qemu-img resize -f raw ubuntu-22.04.2-preinstalled-server-riscv64+unmatched.img +5G
+qemu-img resize -f raw ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img +5G
 ```
 Tenemos todo listo para correr nuestra maquina RISC-V, la iniciamos con el siguiente comando.
 ```
