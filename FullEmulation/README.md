@@ -1,40 +1,39 @@
-# Minitaller QEMU
+# Full Emulation
 ## Setup Inicial
 
-Primero debemos verificar que nuestra computadora es capaz de virtualizar. Para ello corremos el siguiente comando.
+Como es costumbre, iniciamos actualizando nuestros paquetes y repositorios.
+
 ```
-egrep -c '(vmx|svm)' /proc/cpuinfo
+sudo apt update && sudo apt upgrade -y
 ```
-Despues de correrlo deberiamos ver la cantidad de nucleos disponibles para la virtualizacion (debe ser mayor a 0).
 
 ## Instalación
 
-A continuacion vamos a instalar QEMU asi como una interfaz grafica y todas sus dependencias.
+Instalamos los paquetes de qemu necesarios asi como el bios y el setup de UEFI para poder bootear nuestra maquina RISC-V
 ```
-sudo apt install qemu-kvm qemu-system qemu-utils python3 python3-pip libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y
+sudo apt-get install opensbi qemu-system-misc u-boot-qemu
 ```
+Descargamos la imagen preinstalada para un servidor RISC-V dando click al siguiente link:
+https://cdimage.ubuntu.com/releases/22.04.3/release/ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img.xz?_ga=2.59623140.814164571.1695846449-657263962.1692753967
 
-Ahora verificaremos que el servicio libvirtd este funcionando correctamente (necesitamos que libvirtd este activo siempre que queramos usar QEMU).
-```
-sudo systemctl status libvirtd.service
-```
+Si el link de descarga directa no funciona buscar la imagen para QEMU en su versión Ubuntu 22.04.3 en el siguiente link:
+https://ubuntu.com/download/risc-v
 
-## Creacion de red para las maquinas virtuales
-Primero es necesario habilitar el servicio de redes virtuales.
+Ahora copiamos la imagen a nuestro directorio de trabajo y procedemos a descomprimirla.
 ```
-sudo virsh net-start default
+xz -dk ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img.xz
 ```
-Ahora con este comando haremos que inicie automaticamente al reiniciar la computadora.
+Para poder instalar los programas que requerimos sin problemas es necesario aumentar el tamaño de la imagen, con el siguiente comando la aumentamos en 5GB. El sistema de archivos automaticamente se expande para tomar el nuevo tamaño.
 ```
-sudo virsh net-autostart default
+qemu-img resize -f raw ubuntu-22.04.2-preinstalled-server-riscv64+unmatched.img +5G
 ```
-Tambien es necesario agregar los permisos necesarios para que el servicio se pueda conectar con las maquinas virtuales.
+Tenemos todo listo para correr nuestra maquina RISC-V, la iniciamos con el siguiente comando.
 ```
-sudo usermod -aG libvirt $USER
-sudo usermod -aG libvirt-qemu $USER
-sudo usermod -aG kvm $USER
-sudo usermod -aG input $USER
-sudo usermod -aG disk $USER
+qemu-system-riscv64 \
+-machine virt -nographic -m 2048 -smp 4 \
+-bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin \
+-kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
+-device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
+-device virtio-rng-pci \
+-drive file=ubuntu-22.04.2-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
 ```
-Listo! Terminamos el setup inicial, solo falta reiniciar el equipo.
-
