@@ -98,3 +98,7 @@ Y finalmente lo corremos.
 ```
 ./pascalstriangle
 ```
+Si desea apagar la maquina virtual utilice el siguiente comando
+```
+sudo shotdown -h now
+```
