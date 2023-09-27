@@ -37,7 +37,7 @@ qemu-system-riscv64 \
 -device virtio-rng-pci \
 -drive file=ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
 ```
-Cuando vea el siguiente mensaje en la consola presione Enter
+Cuando vea el siguiente mensaje en la consola presione Enter\n
 [  OK  ] Reached target Cloud-init target.
 
 El usuario y la contraseña es ubuntu, debere crear una nueva contraseña para poder ingresar.
