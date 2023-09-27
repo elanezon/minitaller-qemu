@@ -1,4 +1,4 @@
-# Minitaller QEMU
+# Virtualization (VirtManager)
 ## Setup Inicial
 
 Primero debemos verificar que nuestra computadora es capaz de virtualizar. Para ello corremos el siguiente comando.
