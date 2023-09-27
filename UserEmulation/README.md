@@ -1,4 +1,4 @@
-# Minitaller QEMU
+# User Emulation QEMU
 ## Setup Inicial
 
 Primero actualizamos los repositorios y los paquetes con el siguiente comando.
