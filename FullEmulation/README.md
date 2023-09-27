@@ -35,5 +35,5 @@ qemu-system-riscv64 \
 -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
 -device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
 -device virtio-rng-pci \
--drive file=ubuntu-22.04.2-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
+-drive file=ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
 ```
