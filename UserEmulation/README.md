@@ -66,7 +66,7 @@ Y ahora corremos el binario.
 ```
 NOTA: Normalmente esta ejecucion habria retornado un error ya que las instrucciones no son compatibles con la arquitectura x86 del sistema pero al haber instalado el paquete qemu-user-static podemos correr programas estaticos de las arquitecturas soportadas sin ningún problema.
 
-##Programa Dinamico
+## Programa Dinamico
 Ahora vamos a compilar de manera dinamica el mismo programa.
 
 ```
